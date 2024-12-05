@@ -1,50 +1,51 @@
-import { init as instantInit } from "@dorilama/instantdb-vue";
+import { init as instantInit } from "@dorilama/instantdb-vue"
 
 export interface Todo {
-  id: string;
-  text: string;
-  done: boolean;
-  createdAt: number;
+  id: string
+  text: string
+  done: boolean
+  createdAt: number
 }
 
 export type Schema = {
-  todos: Todo;
-};
+  todos: Todo
+}
 
 export type RoomSchema = {
   chat: {
     presence: {
-      userId: string;
-      color: string;
-      path: string;
-    };
+      userId: string
+      color: string
+      path: string
+    }
     topics: {
-      emoji: { text: string; color?: string };
-    };
-  };
-};
-
-function init() {
-  const config = useRuntimeConfig();
-  const appId = config.public.instantAppId as string;
-  return instantInit<Schema, RoomSchema>({
-    appId,
-    __extra_vue: { clientOnlyUseQuery: true },
-  });
+      emoji: {
+        text: string
+        color?: string
+      }
+    }
+  }
 }
 
-let db: ReturnType<typeof init>;
+function init() {
+  return instantInit<Schema, RoomSchema>({
+    appId: useRuntimeConfig().public.instantAppId,
+    __extra_vue: { clientOnlyUseQuery: true },
+  })
+}
+
+let db: ReturnType<typeof init>
 
 export function useDb() {
   if (!db) {
-    db = init();
+    db = init()
   }
 
-  return db;
+  return db
 }
 
 export const useClientOnlyQuery: typeof db.useQuery = (query) => {
-  const db = useDb();
+  const db = useDb()
   if (typeof window === "undefined") {
     return {
       isLoading: ref(true),
@@ -52,7 +53,7 @@ export const useClientOnlyQuery: typeof db.useQuery = (query) => {
       pageInfo: shallowRef(undefined),
       error: shallowRef(undefined),
       stop: () => {},
-    };
+    }
   }
-  return db.useQuery(query);
-};
+  return db.useQuery(query)
+}

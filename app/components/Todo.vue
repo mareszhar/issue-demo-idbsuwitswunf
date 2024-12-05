@@ -13,9 +13,10 @@
 
 <script setup lang="ts">
 import { id } from "@dorilama/instantdb-vue"
-const db = useDb()
 
+const db = useDb()
 const { error, data } = db.useQuery({ todos: {} })
+
 function add() {
   db.transact(
     db.tx.todos[id()].update({

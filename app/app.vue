@@ -10,8 +10,8 @@
       <ClientOnlyTodo />
     </div>
     <p v-else>
-      add your instant appId in .env (INSTANT_APP_ID="") or directly in nuxt
-      config
+      add your instant appId in .env (NUXT_PUBLIC_INSTANT_APP_ID="")
+      or directly in nuxt config
     </p>
   </div>
 </template>

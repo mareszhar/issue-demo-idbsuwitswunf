@@ -9,10 +9,11 @@
 </template>
 
 <script setup lang="ts">
-import { id } from "@dorilama/instantdb-vue";
-const db = useDb();
+import { id } from "@dorilama/instantdb-vue"
 
-const { error, data } = useClientOnlyQuery({ todos: {} });
+const db = useDb()
+const { error, data } = useClientOnlyQuery({ todos: {} })
+
 function add() {
   db.transact(
     db.tx.todos[id()].update({
@@ -20,6 +21,6 @@ function add() {
       done: false,
       createdAt: Date.now(),
     })
-  );
+  )
 }
 </script>

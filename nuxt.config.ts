@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      instantAppId: '',
+      instantAppId: '', // will automatically receive value of env var NUXT_PUBLIC_INSTANT_APP_ID
     },
   },
 })
