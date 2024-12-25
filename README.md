@@ -64,9 +64,9 @@ bun run dev
 
 ---
 
-## UPDATE: Solutions Available
+## UPDATE: Solution Available
 
-### Solution 1:
+### Solution:
 
 Make sure your `tsconfig.json` includes this setting:
 
@@ -76,9 +76,9 @@ Make sure your `tsconfig.json` includes this setting:
 }
 ```
 
-### Solution 2:
+### Partial Solution 2 Notice:
 
-Define an explicit schema in the new `instant.schema.ts` file, and include it in your Instant initializer:
+Alternatively, you can also define an explicit schema in the new `instant.schema.ts` file, and include it in your Instant initializer:
 
 ```ts
 init({
@@ -88,5 +88,12 @@ init({
 })
 ```
 
-Refer to the new [Modeling Data](https://www.instantdb.com/docs/modeling-data) chapter in Instant's docs for more details.
+This sometimes solves the intellisense warnings in the IDE. But, if you're using [vitesse-nuxt](https://github.com/antfu/vitesse-nuxt) or any of its variants,
+the typecheck script `"typecheck": "vue-tsc --noEmit"` will still fail. 
 
+For that reason, it's better to keep the `"noUncheckedIndexedAccess": false` rule in your `tsconfig.json` even if you're using the new `instant.schema.ts` file 
+and its `schema` export to type your Instant instance. 
+
+Either way, the new `instant.schema.ts` setup does offer better intellisense, so it's a good idea to use it, specially as you settle on a schema.
+
+Refer to the new [Modeling Data](https://www.instantdb.com/docs/modeling-data) chapter in Instant's docs for more details.
