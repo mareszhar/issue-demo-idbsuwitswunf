@@ -61,3 +61,32 @@ yarn dev
 # bun
 bun run dev
 ```
+
+---
+
+## UPDATE: Solutions Available
+
+### Solution 1:
+
+Make sure your `tsconfig.json` includes this setting:
+
+```ts
+"compilerOptions": {
+    "noUncheckedIndexedAccess": false
+}
+```
+
+### Solution 2:
+
+Define an explicit schema in the new `instant.schema.ts` file, and include it in your Instant initializer:
+
+```ts
+init({
+    appId: useRuntimeConfig().public.instantAppId,
+    schema,
+    // more settings can go here
+})
+```
+
+Refer to the new [Modeling Data](https://www.instantdb.com/docs/modeling-data) chapter in Instant's docs for more details.
+
